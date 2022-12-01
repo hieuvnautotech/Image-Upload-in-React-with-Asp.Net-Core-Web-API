@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\hieuv\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\hieuv\\.nuget\\packages"
+    ]
+  }
+}

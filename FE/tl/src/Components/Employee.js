@@ -12,7 +12,8 @@ const initialFieldValues = {
   imageFile: null,
 };
 
-export default function Employee() {
+export default function Employee(props) {
+  const {addOrEdit} = props;
   const [errors, setErrors] = useState({})
   const [values, setValues] = useState(initialFieldValues);
   const handleInputChange = (e) => {
@@ -49,12 +50,31 @@ export default function Employee() {
     return Object.values(temp).every(x => x==true)
   }
 
+  const resetForm = () => {
+    setValues(initialFieldValues)
+    document.getElementById("image-uploader").value = null
+    setErrors({})
+
+  }
+
   const handleFormSubmit = e => { 
     e.preventDefault();
-    if (ValidityState()) {
-      
+    if (validate()) {
+      const formData = new FormData()
+      formData.append('employeeId', values.employeeId)
+      formData.append('employeeName', values.employeeName)
+      formData.append('occupation', values.occupation)
+      formData.append('imageName', values.imageName)
+      formData.append('imageFile', values.imageFile)
+      addOrEdit(formData,resetForm)
     }
   }
+
+  
+
+  const applyErrorClass = field =>((field in errors && errors[field]==false)?'invalid-field':'')
+
+  
 
   return (
     <>
@@ -69,13 +89,14 @@ export default function Employee() {
               <input
                 type="file"
                 accept="image/*"
-                className="form-control-file"
+                className={"form-control-file"+applyErrorClass('imageSrc')}
                 onChange={showPreview}
+                id="image-uploader"
               />
             </div>
             <div className="form-group">
               <input
-                className="form-control"
+                className={"form-control"+applyErrorClass('employeeName')}
                 placeholder="Employee Name"
                 name="employeeName"
                 value={values.employeeName}

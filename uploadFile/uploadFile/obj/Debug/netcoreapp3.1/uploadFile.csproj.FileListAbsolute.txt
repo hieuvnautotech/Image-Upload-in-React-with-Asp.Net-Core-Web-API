@@ -191,3 +191,4 @@ D:\bt_NetReactFullStack\Image-Upload-in-React-with-Asp.Net-Core-Web-API\uploadFi
 D:\bt_NetReactFullStack\Image-Upload-in-React-with-Asp.Net-Core-Web-API\uploadFile\uploadFile\obj\Debug\netcoreapp3.1\uploadFile.dll
 D:\bt_NetReactFullStack\Image-Upload-in-React-with-Asp.Net-Core-Web-API\uploadFile\uploadFile\obj\Debug\netcoreapp3.1\uploadFile.pdb
 D:\bt_NetReactFullStack\Image-Upload-in-React-with-Asp.Net-Core-Web-API\uploadFile\uploadFile\obj\Debug\netcoreapp3.1\uploadFile.genruntimeconfig.cache
+D:\bt_NetReactFullStack\Image-Upload-in-React-with-Asp.Net-Core-Web-API\uploadFile\uploadFile\obj\Debug\netcoreapp3.1\uploadFile.csproj.AssemblyReference.cache

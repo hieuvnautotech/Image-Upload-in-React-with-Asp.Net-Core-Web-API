@@ -13,7 +13,7 @@ code {
 }
 
 .invalid-field{
-  border-color: red;
-  color: red;
-  background-color: white;
+  border-color: #dc3545;
+  color: #dc3545;
+  background-color: #fff;
 }

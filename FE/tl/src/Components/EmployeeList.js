@@ -5,9 +5,9 @@ export default function EmployeeList() {
   return (
     <div className='row'>
         <div className='col-md-12'>
-            <div class='jumbotron jumbotron-fluid py-4'>
-                <div class='container text-center'>
-                    <h1 class="display-4">Empoyee Register</h1>
+            <div className='jumbotron jumbotron-fluid py-4'>
+                <div className='container text-center'>
+                    <h1 className="display-4">Empoyee Register</h1>
                 </div>
             </div>
         </div>

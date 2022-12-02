@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\bt_NetReactFullStack\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj": {}
+    "E:\\HieuSW\\hieu\\bt_ASPReactFullStack\\Upload_File\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj": {}
   },
   "projects": {
-    "D:\\bt_NetReactFullStack\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj": {
+    "E:\\HieuSW\\hieu\\bt_ASPReactFullStack\\Upload_File\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\bt_NetReactFullStack\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj",
+        "projectUniqueName": "E:\\HieuSW\\hieu\\bt_ASPReactFullStack\\Upload_File\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj",
         "projectName": "uploadFile",
-        "projectPath": "D:\\bt_NetReactFullStack\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj",
-        "packagesPath": "C:\\Users\\Hieu\\.nuget\\packages\\",
-        "outputPath": "D:\\bt_NetReactFullStack\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\obj\\",
+        "projectPath": "E:\\HieuSW\\hieu\\bt_ASPReactFullStack\\Upload_File\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\uploadFile.csproj",
+        "packagesPath": "C:\\Users\\hieuv\\.nuget\\packages\\",
+        "outputPath": "E:\\HieuSW\\hieu\\bt_ASPReactFullStack\\Upload_File\\Image-Upload-in-React-with-Asp.Net-Core-Web-API\\uploadFile\\uploadFile\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Hieu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\hieuv\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -65,7 +65,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -77,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.414\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

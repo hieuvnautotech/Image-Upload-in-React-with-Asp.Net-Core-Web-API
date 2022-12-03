@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-
+import "../index";
+import TextField from "@mui/material/TextField";
 const defaultImageSrc = "img/sample.png";
 
 const initialFieldValues = {
@@ -13,11 +14,12 @@ const initialFieldValues = {
 };
 
 export default function Employee(props) {
-  const {addOrEdit} = props;
-  const [errors, setErrors] = useState({})
+  const { addOrEdit } = props;
+  const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialFieldValues);
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setValues({ ...values, [name]: value });
   };
 
@@ -41,44 +43,44 @@ export default function Employee(props) {
       });
     }
   };
-  
-  const validate = () => { 
-    let temp = {}
-    temp.employeeName = values.employeeName==""?false:true
-    temp.imageSrc = values.imageSrc == defaultImageSrc ? false : true
-    setErrors(temp)
-    return Object.values(temp).every(x => x==true)
-  }
+
+  const validate = () => {
+    let temp = {};
+    temp.employeeName = values.employeeName === "" ? "okokok" : false;
+    temp.Occupation = values.Occupation === "" ? true : false;
+    temp.imageSrc = values.imageSrc === defaultImageSrc ? true : false;
+    setErrors(temp);
+    return Object.values(temp).every((x) => x === true);
+  };
 
   const resetForm = () => {
-    setValues(initialFieldValues)
-    document.getElementById("image-uploader").value = null
-    setErrors({})
+    setValues(initialFieldValues);
+    document.getElementById("image-uploader").value = null;
+    setErrors({});
+  };
 
-  }
-
-  const handleFormSubmit = e => { 
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      const formData = new FormData()
-      formData.append('employeeId', values.employeeId)
-      formData.append('employeeName', values.employeeName)
-      formData.append('occupation', values.occupation)
-      formData.append('imageName', values.imageName)
-      formData.append('imageFile', values.imageFile)
-      addOrEdit(formData,resetForm)
+      const formData = new FormData();
+      formData.append("employeeId", values.employeeId);
+      formData.append("employeeName", values.employeeName);
+      formData.append("occupation", values.occupation);
+      formData.append("imageName", values.imageName);
+      formData.append("imageFile", values.imageFile);
+      addOrEdit(formData, resetForm);
     }
-  }
+  };
 
-  
-
-  const applyErrorClass = field =>((field in errors && errors[field]==false)?'invalid-field':'')
-
-  
+  useEffect(() => {
+    console.log(errors, "okoko");
+  }, [errors]);
+  const applyErrorClass = (field) =>
+    field in errors && errors[field] === false ? "invalid-field" : "";
 
   return (
     <>
-      <div className="container" text-center>
+      <div className="container text-center">
         <p className="lead">An Employee</p>
       </div>
       <form autoComplete="off" noValidate onSubmit={handleFormSubmit}>
@@ -89,32 +91,46 @@ export default function Employee(props) {
               <input
                 type="file"
                 accept="image/*"
-                className={"form-control-file"+applyErrorClass('imageSrc')}
+                className={"form-control-file" + applyErrorClass("imageSrc")}
                 onChange={showPreview}
                 id="image-uploader"
               />
             </div>
             <div className="form-group">
-              <input
-                className={"form-control"+applyErrorClass('employeeName')}
+              {/* <input
+                className={"form-control" + applyErrorClass("employeeName")}
                 placeholder="Employee Name"
                 name="employeeName"
                 value={values.employeeName}
                 onChange={handleInputChange}
+              /> */}
+              <TextField
+                error={errors.employeeName ? true : false}
+                label="Employee Name"
+                onChange={(e) => {
+                  setValues({ ...values, employeeName: e.target.value });
+                }}
+                helperText={errors.employeeName}
               />
             </div>
 
             <div className="form-group">
-              <input
-                className="form-control"
-                placeholder="Occupation"
-                name="occupation"
-                value={values.occupation}
-                onChange={handleInputChange}
+              <TextField
+                error={errors.Occupation ? true : false}
+                label="Occupation"
+                onChange={(e) => {
+                  setValues({ ...values, Occupation: e.target.value });
+                }}
               />
             </div>
             <div className="form-group text-center">
-              <button type='submit' className="btn btn-light">Submit</button>
+              <button
+                type="submit"
+                className="btn btn-light"
+                onClick={handleFormSubmit}
+              >
+                Submit
+              </button>
             </div>
           </div>
         </div>

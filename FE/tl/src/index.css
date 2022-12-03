@@ -13,7 +13,12 @@ code {
 }
 
 .invalid-field{
-  border-color: #dc3545;
-  color: #dc3545;
+  border-color: #e60d23;
+  color: #e70c22;
   background-color: #fff;
 }
+
+/* .btn-light{
+  color: #e70c22;
+  border-color: #e60d23;
+} */

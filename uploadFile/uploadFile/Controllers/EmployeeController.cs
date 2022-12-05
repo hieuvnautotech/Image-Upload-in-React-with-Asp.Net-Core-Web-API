@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using uploadFile.Models;
 
 namespace uploadFile.Controllers
@@ -28,7 +29,16 @@ namespace uploadFile.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<EmployeeModel>>> GetEmployees()
         {
-            return await _context.Employees.ToListAsync();
+            return await _context.Employees
+                .Select(x => new EmployeeModel()
+                {
+                    EmployeeID = x.EmployeeID,
+                    EmployeeName = x.EmployeeName,
+                    Occupation = x.Occupation,
+                    ImageName = x.ImageName,
+                    ImageSrc = String.Format("{0}://{1}{2}/Images/{3}", Request.Scheme, Request.Host, Request.PathBase, x.ImageName)
+                })
+                .ToListAsync();
         }
 
         // GET: api/Employee/5
@@ -49,11 +59,17 @@ namespace uploadFile.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutEmployeeModel(int id, EmployeeModel employeeModel)
+        public async Task<IActionResult> PutEmployeeModel(int id, [FromForm] EmployeeModel employeeModel)
         {
             if (id != employeeModel.EmployeeID)
             {
                 return BadRequest();
+            }
+
+            if (employeeModel.ImageFile != null)
+            {
+                DeleteImage(employeeModel.ImageName);
+                employeeModel.ImageName = await SaveImage(employeeModel.ImageFile);
             }
 
             _context.Entry(employeeModel).State = EntityState.Modified;
@@ -99,7 +115,7 @@ namespace uploadFile.Controllers
             {
                 return NotFound();
             }
-
+            DeleteImage(employeeModel.ImageName);
             _context.Employees.Remove(employeeModel);
             await _context.SaveChangesAsync();
 
@@ -116,12 +132,20 @@ namespace uploadFile.Controllers
         { 
             string imageName= new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
             imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
-            var imagePath = Path.Combine(_hostEnviroment.ContentRootPath, "Image", imageName);
+            var imagePath = Path.Combine(_hostEnviroment.ContentRootPath, "Images", imageName);
             using (var fileStream = new FileStream(imagePath, FileMode.Create))
             {
                 await imageFile.CopyToAsync(fileStream);
             }
         return imageName;
+        }
+
+        [NonAction]
+        public void DeleteImage(string imageName)
+        {
+            var imagePath = Path.Combine(_hostEnviroment.ContentRootPath, "Images", imageName); 
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
         }
     }
 }

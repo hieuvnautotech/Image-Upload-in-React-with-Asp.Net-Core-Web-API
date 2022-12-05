@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 const defaultImageSrc = "img/sample.png";
 
 const initialFieldValues = {
-  employeeId: 0,
+  employeeID: 0,
   employeeName: "",
   Occupation: "",
   imageName: "",
@@ -14,9 +14,15 @@ const initialFieldValues = {
 };
 
 export default function Employee(props) {
-  const { addOrEdit } = props;
+  const { addOrEdit, recordForEdit } = props;
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialFieldValues);
+
+useEffect(() => {
+  if (recordForEdit != null) setValues(recordForEdit);
+}, [recordForEdit]);
+
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
@@ -46,28 +52,33 @@ export default function Employee(props) {
 
   const validate = () => {
     let temp = {};
-    temp.employeeName = values.employeeName === "" ? "okokok" : false;
-    temp.Occupation = values.Occupation === "" ? true : false;
-    temp.imageSrc = values.imageSrc === defaultImageSrc ? true : false;
+    // temp.employeeName = values.employeeName === "" ? "employNameNull" : false;
+    // temp.Occupation = values.Occupation === "" ? true : false;
+    // temp.imageSrc = values.imageSrc === defaultImageSrc ? true : false;
+    temp.employeeName = values.employeeName === "" ? false : true
+    temp.imageSrc = values.imageSrc === defaultImageSrc ? false : true
     setErrors(temp);
     return Object.values(temp).every((x) => x === true);
   };
 
   const resetForm = () => {
+    console.log("reset");
     setValues(initialFieldValues);
     document.getElementById("image-uploader").value = null;
     setErrors({});
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = e => {
     e.preventDefault();
+    console.log("NhanRoisubmit");
     if (validate()) {
       const formData = new FormData();
-      formData.append("employeeId", values.employeeId);
+      formData.append("employeeID", values.employeeID);
       formData.append("employeeName", values.employeeName);
       formData.append("occupation", values.occupation);
       formData.append("imageName", values.imageName);
       formData.append("imageFile", values.imageFile);
+      console.log("ValidateSubmit");
       addOrEdit(formData, resetForm);
     }
   };
@@ -97,37 +108,40 @@ export default function Employee(props) {
               />
             </div>
             <div className="form-group">
-              {/* <input
+              <input
                 className={"form-control" + applyErrorClass("employeeName")}
                 placeholder="Employee Name"
                 name="employeeName"
                 value={values.employeeName}
                 onChange={handleInputChange}
-              /> */}
-              <TextField
+              />
+              {/* <TextField
                 error={errors.employeeName ? true : false}
                 label="Employee Name"
                 onChange={(e) => {
                   setValues({ ...values, employeeName: e.target.value });
                 }}
                 helperText={errors.employeeName}
-              />
+              /> */}
             </div>
 
             <div className="form-group">
-              <TextField
+              <input className="form-control" placeholder="Occupation" name="occupation" value={values.occupation} onChange={ handleInputChange}>
+              
+              </input>
+              {/* <TextField
                 error={errors.Occupation ? true : false}
                 label="Occupation"
                 onChange={(e) => {
                   setValues({ ...values, Occupation: e.target.value });
                 }}
-              />
+              /> */}
             </div>
             <div className="form-group text-center">
               <button
                 type="submit"
                 className="btn btn-light"
-                onClick={handleFormSubmit}
+                
               >
                 Submit
               </button>

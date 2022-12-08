@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import "../index";
 import TextField from "@mui/material/TextField";
+
 const defaultImageSrc = "img/sample.png";
 
 const initialFieldValues = {
@@ -18,10 +19,9 @@ export default function Employee(props) {
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialFieldValues);
 
-useEffect(() => {
-  if (recordForEdit != null) setValues(recordForEdit);
-}, [recordForEdit]);
-
+  useEffect(() => {
+    if (recordForEdit != null) setValues(recordForEdit);
+  }, [recordForEdit]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,8 +55,8 @@ useEffect(() => {
     // temp.employeeName = values.employeeName === "" ? "employNameNull" : false;
     // temp.Occupation = values.Occupation === "" ? true : false;
     // temp.imageSrc = values.imageSrc === defaultImageSrc ? true : false;
-    temp.employeeName = values.employeeName === "" ? false : true
-    temp.imageSrc = values.imageSrc === defaultImageSrc ? false : true
+    temp.employeeName = values.employeeName === "" ? false : true;
+    temp.imageSrc = values.imageSrc === defaultImageSrc ? false : true;
     setErrors(temp);
     return Object.values(temp).every((x) => x === true);
   };
@@ -68,7 +68,7 @@ useEffect(() => {
     setErrors({});
   };
 
-  const handleFormSubmit = e => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
     console.log("NhanRoisubmit");
     if (validate()) {
@@ -126,9 +126,13 @@ useEffect(() => {
             </div>
 
             <div className="form-group">
-              <input className="form-control" placeholder="Occupation" name="occupation" value={values.occupation} onChange={ handleInputChange}>
-              
-              </input>
+              <input
+                className="form-control"
+                placeholder="Occupation"
+                name="occupation"
+                value={values.occupation}
+                onChange={handleInputChange}
+              ></input>
               {/* <TextField
                 error={errors.Occupation ? true : false}
                 label="Occupation"
@@ -138,17 +142,14 @@ useEffect(() => {
               /> */}
             </div>
             <div className="form-group text-center">
-              <button
-                type="submit"
-                className="btn btn-light"
-                
-              >
+              <button type="submit" className="btn btn-light">
                 Submit
               </button>
             </div>
           </div>
         </div>
       </form>
+
     </>
   );
 }
